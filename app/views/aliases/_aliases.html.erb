@@ -1,0 +1,22 @@
+<% aliases.each do |aliased| %>
+    <tr class="hover-button <%= aliased.enabled == 'true' ? '' :'bg-danger'%>" style="cursor:<%=aliased.enabled == 'true'?'auto' :'help'%>;" title="<%= aliased.enabled == 'true' ? '' : 'This Alias is DISABLED' %>">
+        <th><%=h aliased.name %></th>
+        <td>
+            <%=h aliased.command.split[0]%>
+        </td>
+        <td><%=h aliased.command.split[1..-1]*' ' %></td>
+        <td><div><button onclick="copyPermaLink(event)" class="btn btn-sm">PermaLink</button></div></td>
+        <% if session[:auth] %>
+            <td>
+                <div class="dropdown">
+                    <button data-toggle="dropdown" class="btn btn-sm btn-primary dropdown-toggle">Edit</button>
+                    <ul class="dropdown-menu">
+                        <li><a onclick='editAlias(<%= javascript_string aliased.as_json %>)'>Edit</a></li>
+                        <li><a onclick='toggleALias(<%= javascript_string  aliased.name %>)'>Disable</a></li>
+                        <li><a onclick='deleteAlias(<%= javascript_string  aliased.name %>)'>Delete</a></li>
+                    </ul>
+                </div>
+            </td>
+        <% end %>
+    </tr>
+<% end %>

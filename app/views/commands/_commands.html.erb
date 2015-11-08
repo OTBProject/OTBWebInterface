@@ -1,0 +1,28 @@
+<% commands.each do |command| %>
+    <tr class="hover-button <%= command.enabled == 'true' ? '' : 'bg-danger' %>" style="cursor:<%=command.enabled == 'true'?'auto' :'help'%>;" title="<%= command.enabled == 'true' ? '' : 'This Command is DISABLED' %>">
+      <th><%= h command.name %></th>
+      <td>
+        <% if command.script.nil? %>
+            <%= h command.response %>
+        <% else %>
+            <b>[SCRIPT]</b><%= h command.script %>
+        <% end %>
+      </td>
+      <td><%= h command.execUserLevel.gsub('_', ' ').split.map(&:capitalize)*' ' %></td>
+      <td>
+          <button onclick="copyPermaLink(event)" class="btn btn-sm">PermaLink</button>
+      </td>
+      <% if session[:auth] %>
+          <td>
+            <div class="dropdown">
+              <button data-toggle="dropdown" class="btn btn-sm btn-primary dropdown-toggle">Edit</button>
+              <ul class="dropdown-menu">
+                <li><a onclick='editCommand(<%= javascript_string command.as_json %>)'>Edit</a></li>
+                <li><a onclick='toggleCommand(<%= javascript_string  command.name %>)'>Disable</a></li>
+                <li><a onclick='deleteCommand(<%= javascript_string  command.name %>)'>Delete</a></li>
+              </ul>
+            </div>
+          </td>
+      <% end %>
+    </tr>
+<% end %>

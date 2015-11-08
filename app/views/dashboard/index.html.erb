@@ -1,0 +1,45 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+
+      <% @channels.each do |channel| %>
+          <!--      <div class="col-md-3">
+        <div class="dropdown btn-group btn-block">
+
+          <button class="btn btn-block btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <%= channel %>
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu-<%= channel %>">
+            <li><a href="/dashboard/<%= channel %>/aliases">Aliases</a></li>
+            <li><a href="/dashboard/<%= channel %>/quotes">Quotes</a></li>
+            <li><a href="/dashboard/<%= channel %>/commands">Commands</a></li>
+
+          </ul>
+        </div>
+      </div>-->
+
+          <div class="panel panel-default col-md-2">
+
+            <div class="panel-heading row no-margin" role="tab" data-toggle="collapse" data-parent="#accordion" href="#collapse-<%= channel %>" style="cursor: pointer;">
+              <div class="col-xs-6 text-left"><h4 class="panel-title"><%= channel %></h4></div>
+              <div class="col-xs-6 text-right"><span class="caret"></span></div>
+
+
+            </div>
+            <div id="collapse-<%= channel %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+              <ul class="list-group">
+                <li class="list-group-item noPadding"><a class="btn-block link-unstyled" href="/dashboard/<%= channel %>/commands">Commands</a></li>
+                <li class="list-group-item noPadding"><a class="btn-block link-unstyled" href="/dashboard/<%= channel %>/aliases">Aliases</a></li>
+                <li class="list-group-item noPadding"><a class="btn-block link-unstyled" href="/dashboard/<%= channel %>/quotes">Quotes</a></li>
+              </ul>
+            </div>
+
+          </div>
+
+
+      <% end %>
+    </div>
+  </div>
+</div>

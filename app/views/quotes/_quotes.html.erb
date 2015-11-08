@@ -1,0 +1,21 @@
+<% quotes.each do |quote| %>
+    <tr class="hover-button">
+        <th><%=h quote.id %></th>
+        <td>
+            <%=h quote.text%>
+        </td>
+        <td><div><button onclick="copyPermaLink(event)" class="btn btn-sm">PermaLink</button></div></td>
+        <% if session[:auth] %>
+            <td>
+                <div class="dropdown">
+                    <button data-toggle="dropdown" class="btn btn-sm btn-primary dropdown-toggle">Edit</button>
+                    <ul class="dropdown-menu">
+                        <li><a onclick='editQuote(<%= javascript_string quote.as_json %>)'>Edit</a></li>
+                        <li><a onclick='toggleQuote(<%= javascript_string  quote.id %>)'>Disable</a></li>
+                        <li><a onclick='deleteQuote(<%= javascript_string  quote.id %>)'>Delete</a></li>
+                    </ul>
+                </div>
+            </td>
+        <% end %>
+    </tr>
+<% end %>

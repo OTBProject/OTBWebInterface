@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>OTB Web Interface</title>
+
+  <%= stylesheet_link_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+
+<body>
+<div class="panel" style="padding-left: 0;padding-right: 0;padding-bottom: 0;">
+
+  <nav class="navbar navbar-inverse navbar-fixed-top" id="header">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse row" id="bs-example-navbar-collapse-1">
+        <div class="col-sm-4">
+          <ul class="nav navbar-nav navbar-left">
+            <li class="hidden-xs"><a href="/" id="back" class="glyphicon glyphicon-home"></a></li>
+            <li class="hidden-lg hidden-md  hidden-sm">
+              <a href="/" id="back"><span class="glyphicon glyphicon-home pull-left"></span>&nbsp;&nbsp;&nbsp;&nbsp; OTB
+                Web Interface</a></li>
+            <% unless params[:channel].nil? %>
+                <li>
+                  <a style="font-size:100%;" id="channelName"><%= h params[:channel] %></a>
+                </li>
+            <% end %>
+          </ul>
+        </div>
+
+        <div class="col-sm-4 hidden-xs">
+          <ul class="nav navbar-nav navbar-center">
+            <li><a>OTB Web Interface</a></li>
+          </ul>
+        </div>
+
+        <div class="col-sm-4">
+
+          <ul class="nav navbar-nav navbar-right">
+            <% unless params[:channel].nil? %>
+                <li class="dropdown">
+                  <a class="dropdown-toggle" href="#" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Pages
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a href=<%= h "/dashboard/#{params[:channel]}/commands" %>>Commands</a>
+                    </li>
+                    <li>
+                      <a href=<%= h "/dashboard/#{params[:channel]}/aliases" %>>Aliases</a>
+                    </li>
+                    <li>
+                      <a href=<%= h "/dashboard/#{params[:channel]}/quotes" %>>Quotes</a>
+                    </li>
+                  </ul>
+                </li>
+            <% end %>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </nav>
+
+</div>
+
+<div style="min-height: 80% !important;" class="row fullWidth">
+  <div class="col-sm-12 col-md-10 col-md-offset-1">
+    <%= yield %>
+  </div>
+</div>
+<footer class="navbar-inverse">
+  <div class="container-fluid">
+    <div style="width:100%;margin:auto !important;">
+      <ul class="nav navbar-nav navbar-center footer">
+        <li><a href="https://otbproject.github.io" target="_blank">&copy; OTB Project 2015</a></li>
+        <li><a>Web Interface Version: 1.2-SNAPSHOT</a></li>
+      </ul>
+    </div>
+  </div>
+  </div>
+</footer>
+<%= javascript_include_tag "vendor/modernizr" %>
+<%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+</body>
+</html>
